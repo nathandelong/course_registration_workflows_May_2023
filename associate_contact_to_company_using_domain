@@ -9,7 +9,7 @@ The second is the callback function which is used to pass data back to the workf
 */
 exports.main = (event, callback) => {
   
-  // Instantiate a new HubSpot API client using the HAPI key (secret)
+  // Instantiate a new HubSpot API client
   const hubspotClient = new hubspot.Client({
     accessToken: process.env.hstoken
   });
