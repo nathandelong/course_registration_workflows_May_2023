@@ -1,5 +1,6 @@
 //Using HubSpot Client V3
-// Import the Hubspot NodeJS Client Library - this will allow us to use the HubSpot APIs
+//Code is provided as-is with no guarantee of fitness for any particular purpose. Test before committing to a live environment!
+
 const hubspot = require('@hubspot/api-client');
 
 /* 
