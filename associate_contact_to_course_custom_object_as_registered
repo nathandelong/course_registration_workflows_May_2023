@@ -1,0 +1,43 @@
+//Using HubSpot Client V3
+//Code is provided as-is with no guarantee of fitness for any particular purpose. Test before committing to a live environment!
+
+const hubspot = require('@hubspot/api-client');
+
+/***** Created 12/9/2022 by Nathan De Long @ HubSpot *****/
+/***** NOTE: this custom action is provided as is; please test to ensure it works as desired in your environment before publishing a live workflow! *****/
+
+exports.main = async (event, callback) => {
+
+/***** hstoken represents the name of the secret you are using for this action. *****/  
+  
+  const hubspotClient = new hubspot.Client({
+    accessToken: process.env.hstoken
+  });
+
+try {
+
+const contactID = event.inputFields['hs_object_id'];
+const courseID = '6088669077';  
+  
+const apiResponse = await hubspotClient
+  .apiRequest({
+    method: 'PUT',
+    path: `/crm/v4/objects/contact/${contactID}/associations/courses/${courseID}`,
+    body: [
+           {
+            "associationCategory": "USER_DEFINED", 
+             "associationTypeId": 194           
+           }
+          ]
+  });
+
+console.log(apiResponse.body.results); 
+  
+} 
+  catch (e) {
+  e.message === 'HTTP request failed'
+    ? console.error(JSON.stringify(e.response, null, 2))
+    : console.error(e)
+}
+  callback({  });
+}
